@@ -1,0 +1,29 @@
+{
+  "name": "scot-covid19-heatmap",
+  "version": "0.2.0",
+  "description": "App for tracking COVID-19 data in Scotland",
+  "main": "covid.js",
+  "scripts": {
+    "compile": "tsc",
+    "serve": "browser-sync start --server --watch",
+    "watch": "tsc --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hunt3ri/scot-covid19-heatmap.git"
+  },
+  "keywords": [
+    "COVID-19",
+    "Scotland"
+  ],
+  "author": "Iain Hunter",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hunt3ri/scot-covid19-heatmap/issues"
+  },
+  "homepage": "https://github.com/hunt3ri/scot-covid19-heatmap#readme",
+  "devDependencies": {
+    "browser-sync": "^2.26.7",
+    "typescript": "^3.9.6"
+  }
+}

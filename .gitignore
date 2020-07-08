@@ -1,2 +1,8 @@
 # Pycharm
 .idea/
+
+# Typescript
+*.map
+
+# NPM
+node_modules/
