@@ -4,7 +4,10 @@
   "description": "App for tracking COVID-19 data in Scotland",
   "main": "covid.js",
   "scripts": {
+    "clean" : "del-cli dist",
     "compile": "tsc",
+    "parcel": "parcel index.html",
+    "build": "del-cli dist && parcel build index.html --public-url ./",
     "serve": "browser-sync start --server --watch",
     "watch": "tsc --watch"
   },
@@ -24,6 +27,8 @@
   "homepage": "https://github.com/hunt3ri/scot-covid19-heatmap#readme",
   "devDependencies": {
     "browser-sync": "^2.26.7",
+    "del-cli": "^3.0.1",
+    "parcel-bundler": "^1.12.4",
     "typescript": "^3.9.6"
   }
 }
