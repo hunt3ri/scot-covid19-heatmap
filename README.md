@@ -8,10 +8,16 @@ npm install
 ```
 
 ## Running Locally
-ParcelJS is used to compile and serve source.  It will serve the app on [ http://localhost:1234]( http://localhost:1234)
+[ParcelJS](https://parceljs.org/) is used to compile and serve source.  It will serve the app on [ http://localhost:1234]( http://localhost:1234)
 ```javascript
 npm run serve
 ```
+### Running tests
+App uses [Jest](https://jestjs.io/) test framework with ts-jest for tests.  To run tests:
+```javascript
+npm run test
+```
+
 
 ### Build / Deploy
 ParcelJS will create a dist folder that can be uploaded to your webserver for deployment
