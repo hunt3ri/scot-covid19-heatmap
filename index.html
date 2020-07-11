@@ -13,7 +13,54 @@
 </head>
 <body>
 <div class="container">
-    <h6>COVID-19 Related Deaths in Scotlandxxx</h6>
+    <div class="row ">
+        <div class="col-12 ml-0 pl-0 mr-0 pr-0">
+            <div id="map" class="map"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h6>COVID-19 Related Deaths in Scotland</h6>
+        </div>
+    </div>
+        <div class="row">
+        <div class="col-sm-12 col-md-9">
+            <form>
+                <input id="week" type="range" min="1" max="16" step="1" value="1"/>
+                <label id="weekLbl">Week</label>
+            </form>
+        </div>
+        <div class="col-sm-10 col-md-3 alert alert-primary" id="test" role="alert">
+            <strong>Scroll slider to progress</strong>
+        </div>
+    </div>
+    <div class="row pt-4">
+        <div class="col-12">
+            <h5>Limitations</h5>
+            <p>Heatmap gives an overall sense of progress against covid, however, accuracy is limited by the source
+                dataset. Eg
+                all deaths in Highlands are limited to just one point. Any errors are authors own</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <h5>About</h5>
+            <p>Created by <a href="https://www.linkedin.com/in/hunteriain/">Iain Hunter</a></p>
+            <p>Data sourced from:
+                <a href="https://statistics.gov.scot/resource?uri=http%3A%2F%2Fstatistics.gov.scot%2Fdata%2Fdeaths-involving-coronavirus-covid-19">
+                    statistics.gov.scot
+                </a></p>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img
+                    alt="Creative Commons License"
+                    style="border-width:0"
+                    src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a><br/>This
+            work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative
+            Commons
+            Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+        </div>
+    </div>
 </div>
 <script type="text/javascript" src="app/covid.ts"></script>
 </body>
