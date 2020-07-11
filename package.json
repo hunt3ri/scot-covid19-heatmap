@@ -6,6 +6,7 @@
   "scripts": {
     "build": "del-cli dist && parcel build index.html --public-url ./",
     "clean": "del-cli dist",
+    "test": "jest",
     "serve": "parcel index.html"
   },
   "repository": {
@@ -16,6 +17,9 @@
     "COVID-19",
     "Scotland"
   ],
+  "jest": {
+    "preset": "ts-jest"
+  },
   "author": "Iain Hunter",
   "license": "ISC",
   "bugs": {
@@ -23,8 +27,14 @@
   },
   "homepage": "https://github.com/hunt3ri/scot-covid19-heatmap#readme",
   "devDependencies": {
+    "@types/jest": "^26.0.4",
     "del-cli": "^3.0.1",
+    "jest": "^26.1.0",
     "parcel-bundler": "^1.12.4",
+    "ts-jest": "^26.1.1",
     "typescript": "^3.9.6"
+  },
+  "dependencies": {
+    "moment": "^2.27.0"
   }
 }
