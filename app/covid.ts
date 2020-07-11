@@ -10,12 +10,11 @@ type CovidStat = {
 }
 
 type CovidStats = {
-    totalDeaths: Array<CovidStat>
+    totalDeaths: CovidStat[]
 };
 
+interface requestCallback { (success: boolean, covidStats: CovidStats): void }
 
-const week = document.getElementById('week');
-const weekLbl = document.getElementById('weekLbl');
 
 const map = new Map({
     target: 'map',
@@ -32,16 +31,16 @@ const map = new Map({
     })
 });
 
-const getJSON = function (url: string, callback: any) {
+const getJSON = function (url: string, callback: requestCallback) {
     let xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
     xhr.responseType = 'json';
     xhr.onload = function () {
         let status = xhr.status;
         if (status === 200) {
-            callback(null, xhr.response);
+            callback(true, xhr.response);
         } else {
-            callback(status, xhr.response);
+            callback(false, xhr.response);
         }
     };
     xhr.send();
@@ -49,42 +48,32 @@ const getJSON = function (url: string, callback: any) {
 
 function getTotalDeaths(weekNo: number) {
     getJSON("https://raw.githubusercontent.com/hunt3ri/scot-covid-geo-coder/master/data/totalDeaths.json",
-        function (err: string, data: CovidStats) {
-            if (err !== null) {
-                alert('Something went wrong: ' + err);
-            } else {
-                //console.log("Week is: " + weekNo);
-                for (let element of data["totalDeaths"]) {
-                    if (element["week"] == weekNo) {
-                        //console.log("Total is " + element["total"])
-                        weekLbl!.innerHTML = "Week " + weekNo + ' - ' + getDate(weekNo) + ' - Total Deaths: ' + element["total"];
-
+        function (success: boolean, covidStats: CovidStats): void {
+            if (success) {
+                covidStats.totalDeaths.forEach(stat => {
+                    if (stat.week === weekNo) {
+                        weekLbl!.innerHTML = "Week " + weekNo + ' - ' + getDate(weekNo) + ' - Total Deaths: ' + stat.total;
                     }
-
-                }
+                })
+            } else {
+                alert('Error retrieving JSON file');
             }
         });
 }
 
-// var weekHandler = function () {
-//     map.removeLayer(glbHeatmapLayer)
-//     map.removeLayer(glbPointsLayer)
-//     setHeatMapLayer(week.value)
-//     setPointsLayer(week.value)
-//     getTotalDeaths(week.value)
-// };
+const week: HTMLInputElement = document.getElementById('week') as HTMLInputElement;
+const weekLbl: HTMLLabelElement = document.getElementById('weekLbl') as HTMLLabelElement;
 
 
+var weekHandler = function () {
+    // map.removeLayer(glbHeatmapLayer)
+    // map.removeLayer(glbPointsLayer)
+    // setHeatMapLayer(week.value)
+    // setPointsLayer(week.value)
+    getTotalDeaths(Number(week.value))
+};
 
-//week.addEventListener('change', weekHandler);
-
-
-
-
-console.log("Hello TS ABI")
-let abi = test;
-
-
+week!.addEventListener('change', weekHandler);
 
 
 export function getDate(weeksToAdd: number): string {
@@ -92,3 +81,5 @@ export function getDate(weeksToAdd: number): string {
     startDate.add(weeksToAdd, 'week');
     return startDate.format("DD-MMM-YYYY")
 }
+
+getTotalDeaths(1)
