@@ -3,6 +3,7 @@ import {fromLonLat} from 'ol/proj'
 import OSM from 'ol/source/OSM';
 import TileLayer from 'ol/layer/Tile';
 import moment from 'moment';
+import axios from 'axios';
 
 type CovidStat = {
     week: number
@@ -31,33 +32,19 @@ const map = new Map({
     })
 });
 
-const getJSON = function (url: string, callback: requestCallback) {
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.responseType = 'json';
-    xhr.onload = function () {
-        let status = xhr.status;
-        if (status === 200) {
-            callback(true, xhr.response);
-        } else {
-            callback(false, xhr.response);
-        }
-    };
-    xhr.send();
-};
-
-function getTotalDeaths(weekNo: number) {
-    getJSON("https://raw.githubusercontent.com/hunt3ri/scot-covid-geo-coder/master/data/totalDeaths.json",
-        function (success: boolean, covidStats: CovidStats): void {
-            if (success) {
-                covidStats.totalDeaths.forEach(stat => {
+function setTotalDeaths(weekNo: number): void {
+    axios.get("https://raw.githubusercontent.com/hunt3ri/scot-covid-geo-coder/master/data/totalDeaths.json")
+        .then(function (response) {
+            console.log(response)
+            let covidStats: CovidStats = response.data;
+            covidStats.totalDeaths.forEach(stat => {
                     if (stat.week === weekNo) {
-                        weekLbl!.innerHTML = "Week " + weekNo + ' - ' + getDate(weekNo) + ' - Total Deaths: ' + stat.total;
+                        weekLbl.innerHTML = "Week " + weekNo + ' - ' + getDate(weekNo) + ' - Total Deaths: ' + stat.total;
                     }
                 })
-            } else {
-                alert('Error retrieving JSON file');
-            }
+        })
+        .catch(function (error) {
+            alert('Error retrieving JSON file');
         });
 }
 
@@ -70,7 +57,8 @@ var weekHandler = function () {
     // map.removeLayer(glbPointsLayer)
     // setHeatMapLayer(week.value)
     // setPointsLayer(week.value)
-    getTotalDeaths(Number(week.value))
+    //getTotalDeaths(Number(week.value))
+    setTotalDeaths(Number(week.value))
 };
 
 week!.addEventListener('change', weekHandler);
@@ -82,4 +70,5 @@ export function getDate(weeksToAdd: number): string {
     return startDate.format("DD-MMM-YYYY")
 }
 
-getTotalDeaths(1)
+//getTotalDeaths(1)
+setTotalDeaths(1)
