@@ -20,6 +20,12 @@
   "jest": {
     "preset": "ts-jest"
   },
+  "vue": {
+    "runtimeCompiler": true
+  },
+  "alias": {
+    "vue" : "./node_modules/vue/dist/vue.common.js"
+  },
   "author": "Iain Hunter",
   "license": "ISC",
   "bugs": {
@@ -38,6 +44,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "moment": "^2.27.0",
-    "ol": "^6.3.1"
+    "ol": "^6.3.1",
+    "vue": "^2.6.11"
   }
 }
