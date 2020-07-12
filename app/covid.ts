@@ -14,9 +14,6 @@ type CovidStats = {
     totalDeaths: CovidStat[]
 };
 
-interface requestCallback { (success: boolean, covidStats: CovidStats): void }
-
-
 const map = new Map({
     target: 'map',
     layers: [
@@ -70,5 +67,4 @@ export function getDate(weeksToAdd: number): string {
     return startDate.format("DD-MMM-YYYY")
 }
 
-//getTotalDeaths(1)
 setTotalDeaths(1)
