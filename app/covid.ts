@@ -2,7 +2,8 @@ import {Map, View} from 'ol';
 import {fromLonLat} from 'ol/proj'
 import OSM from 'ol/source/OSM';
 import TileLayer from 'ol/layer/Tile';
-import moment from 'moment';
+import {setMap} from './map'
+import {getDate} from './utils'
 import axios from 'axios';
 import Vue from 'vue'
 
@@ -15,22 +16,6 @@ type CovidStats = {
     totalDeaths: CovidStat[]
 };
 
-function setMap() {
-    return new Map({
-        target: 'map',
-        layers: [
-            new TileLayer({
-                source: new OSM()
-            })
-        ],
-        view: new View({
-            center: fromLonLat([-3.828743, 56.758342]),
-            zoom: 7,
-            maxZoom: 9,
-            minZoom: 5
-        })
-    });
-}
 
 function setTotalDeaths(weekNo: number): void {
     axios.get("https://raw.githubusercontent.com/hunt3ri/scot-covid-geo-coder/master/data/totalDeaths.json")
@@ -40,7 +25,6 @@ function setTotalDeaths(weekNo: number): void {
 
             covidStats.totalDeaths.forEach(stat => {
                 if (stat.week === weekNo) {
-                    //weekLbl.innerHTML = "Week " + weekNo + ' - ' + getDate(weekNo) + ' - Total Deaths: ' + stat.total;
                     app.message = "Week " + weekNo + ' - ' + getDate(weekNo) + ' - Total Deaths: ' + stat.total;
                 }
             })
@@ -51,11 +35,7 @@ function setTotalDeaths(weekNo: number): void {
 }
 
 
-export function getDate(weeksToAdd: number): string {
-    let startDate = moment('2020-03-09');
-    startDate.add(weeksToAdd, 'week');
-    return startDate.format("DD-MMM-YYYY")
-}
+
 
 
 const app = new Vue({
