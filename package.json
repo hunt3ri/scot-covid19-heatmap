@@ -1,0 +1,50 @@
+{
+  "name": "scot-covid19-heatmap",
+  "version": "0.2.0",
+  "description": "App for tracking COVID-19 data in Scotland",
+  "main": "covid.js",
+  "scripts": {
+    "build": "del-cli dist && parcel build index.html --public-url ./",
+    "clean": "del-cli dist",
+    "test": "jest",
+    "serve": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hunt3ri/scot-covid19-heatmap.git"
+  },
+  "keywords": [
+    "COVID-19",
+    "Scotland"
+  ],
+  "jest": {
+    "preset": "ts-jest"
+  },
+  "vue": {
+    "runtimeCompiler": true
+  },
+  "alias": {
+    "vue": "./node_modules/vue/dist/vue.common.js"
+  },
+  "author": "Iain Hunter",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hunt3ri/scot-covid19-heatmap/issues"
+  },
+  "homepage": "https://github.com/hunt3ri/scot-covid19-heatmap#readme",
+  "devDependencies": {
+    "@types/jest": "^26.0.4",
+    "@types/ol": "^6.3.1",
+    "del-cli": "^3.0.1",
+    "jest": "^26.1.0",
+    "parcel-bundler": "^1.12.4",
+    "ts-jest": "^26.1.1",
+    "typescript": "^3.9.6"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "moment": "^2.27.0",
+    "ol": "^6.3.1",
+    "vue": "^2.6.11"
+  }
+}

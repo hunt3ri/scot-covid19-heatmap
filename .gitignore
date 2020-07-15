@@ -1,2 +1,12 @@
 # Pycharm
 .idea/
+
+# Typescript
+*.map
+
+# NPM
+node_modules/
+
+# ParcelJS
+.cache/
+dist/
