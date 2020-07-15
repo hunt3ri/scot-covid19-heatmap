@@ -1,10 +1,8 @@
-import {setMap} from './map'
+import {setMap, setHeatMapLayer, setPointsLayer, resetLayers} from './map'
 import {getCovidStats} from './utils'
 import {CovidStats} from "./models";
 import axios from 'axios';
 import Vue from 'vue'
-
-
 
 
 export function setTotalDeaths(weekNo: number): void {
@@ -30,16 +28,16 @@ let app = new Vue({
         map: {
             setMap();
             setTotalDeaths(1);
+            setHeatMapLayer(1)
+            setPointsLayer(1)
         }
     },
     methods: {
         weekHandler(weekNoStr: string) {
             let weekNo = Number(weekNoStr)
-            // map.removeLayer(glbHeatmapLayer)
-            // map.removeLayer(glbPointsLayer)
-            // setHeatMapLayer(week.value)
-            // setPointsLayer(week.value)
-            //getTotalDeaths(Number(week.value))
+            resetLayers()
+            setHeatMapLayer(weekNo)
+            setPointsLayer(weekNo)
             setTotalDeaths(weekNo)
         }
     }
