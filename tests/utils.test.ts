@@ -13,7 +13,7 @@ test('Message set if match found', () => {
   let covidStats: CovidStats = new CovidStats()
   covidStats.totalDeaths.push(covidStat)
 
-  expect(getCovidStats(covidStats, 12)).toBe("Week 12 - 01-Jun-2020 - Total Deaths: 10");
+  expect(getCovidStats(covidStats, 12)).toBe("w/c 01-Jun-2020 - Total Deaths: 10");
 });
 
 test('No match found returned if weekNo has no match', () => {
