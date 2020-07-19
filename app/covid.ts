@@ -5,7 +5,7 @@ import axios from 'axios';
 import Vue from 'vue'
 
 
-export function setTotalDeaths(weekNo: number): void {
+function setTotalDeaths(weekNo: number): void {
     axios.get("https://raw.githubusercontent.com/hunt3ri/scot-covid-geo-coder/master/data/totalDeaths.json")
         .then(function (response) {
             //console.log(weekNo)
@@ -17,17 +17,15 @@ export function setTotalDeaths(weekNo: number): void {
         });
 }
 
-export function setLocation(weekNo: number): void {
+function setLocation(weekNo: number): void {
     axios.get('https://raw.githubusercontent.com/hunt3ri/scot-covid-geo-coder/master/data/week' + weekNo + '.json')
         .then(function (response) {
             let statsGeoJson: CovidDeathsFeatureCollection = response.data;
             app.locations = [];  // Reset array on each call
 
             statsGeoJson.features.forEach( feature => {
-                console.log(feature)
                 app.locations.push(feature.properties)
             })
-
         })
         .catch(function (error) {
             alert('Error retrieving JSON file ' + error);
