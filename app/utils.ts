@@ -11,7 +11,7 @@ export function getCovidStats(covidStats: CovidStats, weekNo: number): string {
     let message: string = "No match found"
     covidStats.totalDeaths.forEach(stat => {
         if (stat.week === weekNo) {
-            message = "Week " + weekNo + ' - ' + getDate(weekNo) + ' - Total Deaths: ' + stat.total;
+            message = "w/c " + getDate(weekNo) + " - Total Deaths: " + stat.total;
         }
     })
    return message;
